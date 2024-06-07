@@ -48,9 +48,6 @@ def process_image(image_path, roi_size=(100, 100)):
     # Load the image
     image = cv2.imread(image_path)
 
-    # Convert the image to grayscale
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
     # Get the dimensions of the image
     height, width = image.shape[:2]
 
@@ -67,8 +64,8 @@ def process_image(image_path, roi_size=(100, 100)):
     # Create a blank canvas to hold the result
     result = np.zeros_like(image)
 
-    # Copy the grayscale ROI into the result image
-    result[y1:y2, x1:x2] = cv2.cvtColor(gray[y1:y2, x1:x2], cv2.COLOR_GRAY2BGR)
+    # Copy the original ROI into the result image
+    result[y1:y2, x1:x2] = image[y1:y2, x1:x2]
 
     # Save the extracted region
     output_path = 'extracted_region.jpg'
@@ -82,5 +79,5 @@ def process_image(image_path, roi_size=(100, 100)):
     cv2.destroyAllWindows()
 
 # Example usage
-image_path = 'img6.jpg'
-process_image(image_path, roi_size=(350, 300))  # Adjust roi_size as needed
+image_path = 'img2.jpg'
+process_image(image_path, roi_size=(350, 305))  # Adjust roi_size as needed
